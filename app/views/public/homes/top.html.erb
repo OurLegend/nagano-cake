@@ -1,2 +1,55 @@
-<h1>Public::Homes#top</h1>
-<p>Find me in app/views/public/homes/top.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-3">
+      <div class="border border-dark mt-5">
+        <p class="border-bottom border-dark text-center">ジャンル検索</p>
+        <div>
+          <ul class="list-unstyled">
+            <li class="my-2 ml-4">ケーキ</li>
+            <li class="my-2 ml-4">焼き菓子</li>
+            <li class="my-2 ml-4">プリン</li>
+            <li class="my-2 ml-4">キャンディ</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-9">
+      <!--背景画像の挿入-->
+      <div class="col-9 mt-5 background-img">
+        <div class="col-10 mx-auto top-text-box">
+          <p>
+            ようこそ、ながのCAKEへ！<br>
+            このサイトは、ケーキ販売のECサイトになります。<br>
+            会員でない方も商品の閲覧はできますが、<br>
+            購入には会員登録が必要になります。
+          </p>
+        </div>
+      </div>
+      <h2>新着商品</h2>
+      <div class="d-flex justify-content-between">
+        <!--画像の追加、または、商品idから引っ張ってくる-->
+        <div>
+          <img>
+          <p>商品名</p>
+          <p>￥0,000</p>
+        </div>
+        <div>
+          <img>
+          <p>商品名</p>
+          <p>￥0,000</p>
+        </div>
+        <div>
+          <img>
+          <p>商品名</p>
+          <p>￥0,000</p>
+        </div>
+        <div>
+          <img>
+          <p>商品名</p>
+          <p>￥0,000</p>
+        </div>
+      </div>
+      <%= link_to '全ての商品を見る>', public_items_path,class: "float-right mb-3" %>
+    </div>
+  </div>
+</div>
