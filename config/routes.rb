@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     resources :items, only: [:index, :new, :create, :show, :edit, :update]
   end
   namespace :admin do
-    get 'homes/top'
+    root to: "homes#top"
   end
   namespace :public do
     resources :destinations, only: [:index, :create, :edit, :update, :destroy]
