@@ -12,7 +12,11 @@
   </head>
 
   <body>
-    <%= render 'layouts/header' %>
+    <% if admin_signed_in? %>
+      <%= render 'admin/homes/header' %>
+    <% else %>  
+      <%= render 'layouts/header' %>
+    <% end %>  
     <main class="mb-auto">
     <%= yield %>
     </main>
