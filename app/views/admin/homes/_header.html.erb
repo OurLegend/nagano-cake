@@ -1,24 +1,22 @@
-<header>
-  <nav>
-    <div class="navber">
-      <a class>Logo</a>
-      <ul>
-        <li>
-          <%= link_to '商品一覧', admin_items_path, class: 'nav-link' %>
-        </li>
-        <li>
-          <%= link_to '会員一覧', admin_customers_path, class: 'nav-link' %>
-        </li>
-        <li>
-          <%= link_to '注文履歴一覧', admin_root_path, class: 'nav-link' %>
-        </li>
-        <li>
-          <%= link_to 'ジャンル一覧', admin_genres_path, class: 'nav-link' %>    
-        </li>
-        <li>
-          <%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: 'nav-link' %>
-        </li>
+<header class="border-bottom border-dark">
+  <div class="container">
+    <nav class="navbar navbar-expand-lg">
+      <%= link_to admin_root_path do %>
+        <h3 class="border border-dark py-1 px-5 mt-5 text-dark">LOGO</h3>
+      <% end %>  
+      <ul class="navbar-nav ml-auto">
+        <li><%= link_to '商品一覧', admin_items_path, class: 'btn border roundbed ml-5' %></li>
+        <li><%= link_to '会員一覧', admin_customers_path, class: 'btn border roundbed ml-5' %></li>
+        <li><%= link_to '注文履歴一覧', admin_root_path, class: 'btn border roundbed ml-5' %></li>
+        <li><%= link_to 'ジャンル一覧', admin_genres_path, class: 'btn border roundbed ml-5' %></li>
+        <li><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class: 'btn border roundbed ml-5' %></li>
       </ul>
-    </div>      
-  </nav>    
+    </nav>
+    <div class="text-right mt-n4">
+      <%= form_with do |f| %>
+        <%= f.text_field :content, default: "Search" %>
+        <%= button_tag '<i class="fa fa-search"></i>'.html_safe, :type => "submit",:class =>"btn btn-default btn-s-md" %>
+      <% end %>
+    </div>
+  </div>
 </header>
