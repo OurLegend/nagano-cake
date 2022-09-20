@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <table class="table table-bordered mt-5", style="table-layout:fixed;width:100%;">
+      <thead class="thead-light">
+        <tr>
+          <th class="col-2">郵便番号</th>
+          <th class="col-4">住所</th>
+          <th class="col-2">宛名</th>
+          <th class="col-4"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% destinations.each do |destination| %>
+          <tr>
+            <td><%= destination.shipping_postcode %></td>
+            <td><%= destination.shipping_address %></td>
+            <td><%= destination.direction %></td>
+            <td class="text-center">
+              <%= link_to "編集する", edit_public_destination_path(destination.id), class: "btn btn-success mr-2" %>
+              <%= link_to "削除する", public_destination_path(destination.id), method: :delete, "data-confirm" => "本当に消しますか？", class: "btn btn-danger" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

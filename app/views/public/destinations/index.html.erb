@@ -1,2 +1,24 @@
-<h1>Public::Destinations#index</h1>
-<p>Find me in app/views/public/destinations/index.html.erb</p>
+<div style="width: 800px; margin: 30px auto;">
+  <h5 style="width: 160px; text-align: center; background-color: lightgray;">配送先登録/一覧</h5>
+  <br>
+  <%= render "layouts/error_message", obj: @destination %>
+  <!--配送先登録フォーム-->
+  <%= form_with model: @destination, url: public_destinations_path, method: :post, local: true do |f| %>
+    <div class="field mb-1">
+      <%= f.label :shipping_postcode, '郵便番号(ハイフンなし)　　' %>
+      <%= f.text_field :shipping_postcode, placeholder: "0000000" %>
+    </div>
+    <div class="field mb-1">
+      <%= f.label :shipping_address, '住所　　　　 　　　  　　　' %>
+      <%= f.text_field :shipping_address, placeholder: "東京都渋谷区代々木神園町0-0", size: 60 %>
+    </div>
+    <div class="field mb-1">
+      <%= f.label :direction, '宛名　　　　 　　　  　　　' %>
+      <%= f.text_field :direction, placeholder: "令和道子" %>
+      <div class="float-right"><%= f.submit "新規登録", class: "btn btn-success px-4" %></div>
+    </div>
+  <% end %>
+
+  <!--配送先一覧-->
+  <%= render "public/destinations/lists", destinations: @destinations %>
+</div>
