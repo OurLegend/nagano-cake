@@ -12,9 +12,12 @@
   </head>
 
   <body>
+    <!--ログインしているアカウントによってheaderを変える-->
     <% if admin_signed_in? %>
+    <!--adminアカウントの時のheader-->
       <%= render 'admin/homes/header' %>
-    <% else %>  
+    <% else %>
+    <!--ログイン前とcustomerでのログイン時-->
       <%= render 'layouts/header' %>
     <% end %>  
     <main class="mb-auto">
