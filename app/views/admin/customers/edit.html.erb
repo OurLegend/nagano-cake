@@ -1,2 +1,54 @@
-<h1>Admin::Customers#edit</h1>
-<p>Find me in app/views/admin/customers/edit.html.erb</p>
+<div class="contaner">
+  <div>
+    <h5 style="width: 300px; background-color: lightgray;"><%= "#{@customer.full_name} さんの会員情報編集" %></h5>
+  </div>      
+  <table class="table">
+    <tr class="row">
+      <td class="ml-5">会員ID</td>
+      <td style="margin-left: 450px;"><%= @customer.id %></td>
+    </tr>
+      <%= form_with model: @customer, url: admin_customer_path, method: :patch do |f| %>
+        <tr class="form-group row">
+          <td class="col-sm-4 ml-5">氏名</td>
+          <td class="col-sm-3"><%= f.text_field :first_name %></td>
+          <td class="col-sm"><%= f.text_field :last_name %></td>
+        </tr>
+        <tr class="form-group row">
+          <td class="col-sm-4 ml-5">フリガナ</td>
+          <td class="col-sm-3"><%= f.text_field :first_name_kana %></td>
+          <td class="col-sm"><%= f.text_field :last_name_kana %></td>
+        </tr>
+        <tr class="form-group row">
+          <td class="col-form-label col-sm-4 ml-5">郵便番号</td>
+          <td class="col-sm-5"><%= f.text_field :postcode %></td>
+        </tr>
+        <tr class="row">
+          <td class="col-sm-4 ml-5">住所</td>
+          <td class="col-sm"><%= f.text_field :address, size: 60 %></td>
+        </tr>
+        <tr class="row">
+          <td class="col-sm-4 ml-5">電話番号</td>
+          <td class="col-sm"><%= f.text_field :phone_number %></td>
+        </tr>
+        <tr class="row">
+          <td class="col-sm-4 ml-5">メールアドレス</td>
+          <td class="col-sm"><%= f.text_field :email %></td>
+        </tr>
+        <tr class="row">
+          <td class="col-sm-4 ml-5">会員ステータス</td>
+          <td>
+            <%= f.radio_button :is_deleted, :false %>
+            <%= f.label :is_deleted, "有効",{value: :false, style: "display: inline-block;"} %>
+            <%= f.radio_button :is_deleted, :true %>
+            <%= f.label :is_deleted, "退会",{value: :true, style: "display: inline-block;"} %>
+          </td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><%= f.submit "編集内容を保存", class: "btn btn-success" %></td>
+        </tr>
+    <% end %>  
+  </table>    
+</div>
+
+
+  
