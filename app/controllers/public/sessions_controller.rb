@@ -9,6 +9,20 @@ class Public::SessionsController < Devise::SessionsController
   def after_sign_out_path_for(resource)
     new_customer_session_path
   end
+  
+  protected
+  
+  def reject_customer
+    @customer = Customer.find_by(email: params[:customer][:email])
+    if @customer
+      if @customer.valid_password?(params[:customer][:password]) && (@customer.is_deleted == false)
+        flass[:notice] = "退会済みです。再度ご登録をしてご利用ください。"
+        redirect_to new_customer_registration
+      else
+        flash[:notice] = "項目を入力してください"
+      end  
+    end
+  end  
   # GET /resource/sign_in
   # def new
   #   super
