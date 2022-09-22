@@ -1,2 +1,30 @@
-<h1>Public::CartItems#index</h1>
-<p>Find me in app/views/public/cart_items/index.html.erb</p>
+<div style="width: 800px; margin: 30px auto;">
+  <h5 style="width: 160px; text-align: center; background-color: lightgray;">ショッピングカート</h5>
+  <br>
+  <table>
+    <thead>
+        <th>商品名</th>
+        <th>単価(税込)</th>
+        <th>数量</th>
+        <th>小計</th>
+        <th></th>
+    </thead>
+    <tbody>
+      <% @cart_items.each do |cart_item| %>
+      <tr>
+        <td>
+          <%= image_tag cart_item.item.image, style: "width: 100px; align-self: flex-start;" %>
+          <%= cart_item.item.name %>
+        </td>
+        <td><%= number_with_delimiter(cart_item.item.with_tax_price) %></td>
+        <td><%= cart_item.amount %></td>
+        <td><%= number_with_delimiter(cart_item.subtotal) %></td>
+        <% @total_price += cart_item.subtotal %>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="d-inline"><%= link_to "買い物を続ける", public_items_path, class: "btn btn-primary" %></div>
+  <p class="float-right">合計金額 <%= @total_price %></p>
+  <p class="text-center"><%= link_to "情報入力に進む", new_public_order_path, class: "btn btn-success" %></p>
+</div>

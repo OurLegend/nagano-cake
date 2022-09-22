@@ -2,9 +2,9 @@ class Item < ApplicationRecord
   has_one_attached :image
   belongs_to :genre
   has_many :cart_items, dependent: :destroy
-  
-  def add_tax_unit_price
-  (self.unit_price * 1.10).round
+
+  def with_tax_price
+    (unit_price * 1.1).floor
   end
 
   validates :image, presence: true

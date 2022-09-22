@@ -7,10 +7,14 @@
         <h2 class="mb-3"><%= @item.name %></h2>
         <p class="mb-5"><%= @item.detail %></p>
         <!--税込み表示-->
-        <h3 class="d-inline">¥ <%= @item.add_tax_unit_price.to_s(:dalimited) %></h3><span>　(税込)</span>
+        <h3 class="d-inline">¥ <%= number_with_delimiter(@item.with_tax_price) %></h3><span>　(税込)</span>
+        <!--cart_itemに個数を送信-->
         <div class="my-5">
           <%= form_with model: @cart_item, url: public_cart_items_path, method: :post do |f| %>
-            <%= f.hidden_field :customer_id, :value => current_customer.id %>
+            <% if customer_signed_in? %>
+              <%= f.hidden_field :customer_id, :value => current_customer.id %>
+            <% end %>
+            <%= f.hidden_field :item_id, :value => @item.id %>
             <%= f.select :amount, *[1..5],include_blank: "個数選択" %>
             <%= f.submit "カートに入れる", class: "btn btn-success ml-5" %>
           <% end %>
