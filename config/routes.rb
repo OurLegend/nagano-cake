@@ -39,9 +39,14 @@ Rails.application.routes.draw do
     delete 'cart_items/destroy_all'
   end
   namespace :public do
-    resource :customers, only: [:show, :edit, :update]
+    resource :customers, only: [:show, :edit, :update] do
+      collection do
+        get :confirm
+        patch :withdraw
+      end  
+    end  
     get 'customers/confirm'
-    patch 'customers' => 'customers#destroy', as: 'destroy'
+    #patch 'customers' => 'customers#withdraw', as: 'withdraw'
   end
   namespace :public do
     resources :items, only: [:index, :show]
