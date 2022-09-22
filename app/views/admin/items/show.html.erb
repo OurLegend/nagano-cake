@@ -7,8 +7,9 @@
   <%= @item.detail %>
   <p>ジャンル</p>
   <%= @item.genre.name %>
-  <p>税込価格</p><br><p>（税抜価格）</p>
-  <%= number_with_delimiter(@item.unit_price) %>
+  <p>税込価格</p><p>（税抜価格）</p>
+  <%= number_with_delimiter(@item.unit_price) %>円
+  <%= @product.add_tax_price.to_s(:delimited) %>
   <p>販売ステータス</p>
   <%= @item.is_active ? '販売中':'販売停止中' %>
   <%= link_to "編集する", edit_admin_item_path(@item.id), class: 'btn btn-success' %>

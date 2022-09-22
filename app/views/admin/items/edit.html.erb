@@ -1,32 +1,45 @@
-<h4>商品編集</h4>
-<%= form_with model: @item, url: admin_items_path, method: :post do |f| %>
-<div class="form-group">
-<h6>商品画像</h6>
-  <%= f.file_field :image, accept: "image/*" %>
+<div class='container'>
+  <div class='row'>
+    <div class='col-md-3'>
+      <h4>商品編集</h4>
+      <% if @item.errors.any? %>
+        <ul class="alert alert-danger" role="alert">
+          <% @item.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      <% end %>
+      <%= form_with model: @item, url: admin_items_path, method: :post do |f| %>
+      <div class="form-group">
+      <h6>商品画像</h6>
+        <%= f.file_field :image, accept: "image/*" %>
+      </div>
+      <div class="form-group">
+      <h6>商品名</h6>
+        <%= f.text_field :name %>
+      </div>
+      <div class="form-group">
+      <h6>商品説明</h6>
+        <%= f.text_area :detail %>
+      </div>
+      <div class="form-group">
+      <h6>ジャンル</h6>
+        <%= f.label :genre %>
+        <%= f.select :genre_id, options_from_collection_for_select( Genre.all, :id, :name) %>
+      </div>
+      <div class="form-group">
+      <h6>税抜価格</h6>
+        <%= f.text_field :unit_price %><p>円</p>
+      </div>
+      <div class="form-group">
+      <h6>販売ステータス</h6>
+        <%= f.label :is_active, '販売中', value: 1 %>
+        <%= f.radio_button :is_active, '1' %>
+        <%= f.label :is_active, '販売停止中', value: 0 %>
+        <%= f.radio_button :is_active, '0' %>
+      </div>
+        <%= f.submit '変更を保存', class: 'btn btn-success' %>
+      <% end %>
+    </div>
+  </div>
 </div>
-<div class="form-group">
-<h6>商品名</h6>
-  <%= f.text_field :name %>
-</div>
-<div class="form-group">
-<h6>商品説明</h6>
-  <%= f.text_area :detail %>
-</div>
-<div class="form-group">
-<h6>ジャンル</h6>
-  <%= f.label :genre %>
-  <%= f.select :genre_id, options_from_collection_for_select( Genre.all, :id, :name) %>
-</div>
-<div class="form-group">
-<h6>税抜価格</h6>
-  <%= f.text_field :unit_price %><p>円</p>
-</div>
-<div class="form-group">
-<h6>販売ステータス</h6>
-  <%= f.label :is_active, '販売中', value: 1 %>
-  <%= f.radio_button :is_active, '1' %>
-  <%= f.label :is_active, '販売停止中', value: 0 %>
-  <%= f.radio_button :is_active, '0' %>
-</div>
-  <%= f.submit '変更を保存', class: 'btn btn-success' %>
-<% end %>
