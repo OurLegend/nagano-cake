@@ -3,8 +3,9 @@ class Customer < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-         
+
   has_many :destinations, dependent: :destroy
+  has_many :cart_items, dependent: :destroy
 
   validates :first_name, presence: true
   validates :last_name, presence: true
@@ -13,8 +14,8 @@ class Customer < ApplicationRecord
   validates :postcode, presence: true
   validates :address, presence: true
   validates :phone_number, presence: true
-  
+
   def full_name
     self.first_name + "" + self.last_name
-  end  
+  end
 end
