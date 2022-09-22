@@ -1,3 +1,10 @@
+<h4>注文履歴一覧</h4>
 
-<h1>Admin::Homes#top</h1>
-<p>Find me in app/views/admin/homes/top.html.erb</p>
+  <p>購入日時</p>
+  <%= @orders.created_at %>
+  <p>購入者</p>
+  <%= @orders.customer_id %>
+  <p>注文個数</p>
+  <%= @order_details.amount %>
+  <p>注文ステータス</p>
+  <%= @orders.status %>
