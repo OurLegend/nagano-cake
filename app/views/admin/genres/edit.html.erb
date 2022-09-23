@@ -1,6 +1,13 @@
 <div class = "container px-5 px-sm-0">
   <div class = "row">
-        <h4>ジャンル編集</h4>
+    <h4>ジャンル編集</h4>
+    <% if @genre.errors.any? %>
+      <ul class="alert alert-danger" role="alert">
+        <% @genre.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    <% end %>
     <table class = 'table'>
       <tbody>
           <tr>
