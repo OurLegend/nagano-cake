@@ -1,2 +1,31 @@
-<h1>Public::Orders#index</h1>
-<p>Find me in app/views/public/orders/index.html.erb</p>
+<div style="width: 800px; margin: 30px auto;">
+  <h5 style="width: 140px; text-align: center; background-color: lightgray;">注文履歴一覧</h5>
+</div>
+<div style="width: 1200px; height: 600px;">
+  <table border="1" width="1200" style="width: 1000px; margin: 0 auto;">
+
+    <tr>
+      <td style="background-color: whitesmoke; height: 40px">　注文日</td>
+      <td style="background-color: whitesmoke;">　配送先</td>
+      <td style="background-color: whitesmoke;">　注文商品</td>
+      <td style="background-color: whitesmoke;">　支払金額</td>
+      <td style="background-color: whitesmoke;">　ステータス</td>
+      <td style="background-color: whitesmoke;">　注文詳細</td>
+    </tr>
+    <% @orders.each do |order| %>
+      <tr>
+        <td>　<%= order.created_at.strftime('%Y/%m/%d') %></td>
+        <td>　<%= order.shipping_address %></td>
+        <td>
+          <% order.order_details.each do |order_detail| %>
+            　<%= order_detail.item.name %><br>
+          <% end %>
+        </td>
+        <td>　<%= order.total_price %></td>
+        <td>　<%= order.status %></td>
+        <td>　<%= link_to "注文詳細", public_order_path(order.id), class: "btn btn-primary" %></td>
+      </tr>
+    <% end %>
+    <%= paginate @orders %>
+  </table>
+</div>
