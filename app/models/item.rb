@@ -13,4 +13,5 @@ class Item < ApplicationRecord
   validates :name, presence: true
   validates :detail, presence: true
   validates :unit_price, presence: true
+  validates :genre_id, presence: true
 end
