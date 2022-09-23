@@ -6,6 +6,6 @@ class Destination < ApplicationRecord
     validates :direction, presence: true
 
     def destination_all
-      self.shipping_postcode+" "+self.shipping_address+" "+self.direction
+    '〒' + self.shipping_postcode+" "+self.shipping_address+" "+self.direction
     end
 end
