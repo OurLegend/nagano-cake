@@ -1,45 +1,54 @@
-<div style="width: 800px; margin: 30px auto;">
+<div style="width: 800px; margin: 30px auto 0px;">
   <h5 style="width: 140px; text-align: center; background-color: lightgray;">注文履歴一覧</h5>
 </div>
 <div style="width: 1000px; margin: 0 auto;">
-  <strong>注文情報</strong>
-  <table border="1" style="width: 500px;">
-    <tr>
-			<td style="background-color: whitesmoke; width: 100px; height: 40px">注文日</th>
-			<td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
-		</tr>
+	<table border="0">
 		<tr>
-			<td style="background-color: whitesmoke;">配送先</td>
-			<td>〒<%= @order.shipping_postcode %><br><%= @order.shipping_address %><br><%= @order.shipping_name %></td>
-		</tr>
-		<tr>
-			<td style="background-color: whitesmoke; height: 40px">支払方法</td>
-			<td><%= @order.payment_method %></td>
-		</tr>
-		<tr>
-			<td style="background-color: whitesmoke; height: 40px">ステータス</td>
-			<td><%= @order.status %></td>
-		</tr>
-	</table><br>
-	<strong>注文内容</strong>
-	<table border="1" style="width: 600px;">
-		<tr>
-			<td style="background-color: whitesmoke; height: 40px">商品</td>
-			<td style="background-color: whitesmoke; height: 40px">単価（税込み)</td>
-			<td style="background-color: whitesmoke; height: 40px">個数</td>
-			<td style="background-color: whitesmoke; height: 40px">小計</td>
-		</tr>
-		<% @order_details.each do |order_detail| %>
-			<tr>
-			 	<td><%= order_detail.item.name %></td>
-			 	<td><%= order_detail.item.with_tax_price %></td>
-			 	<td><%= order_detail.amount %></td>
-			 	<td><%= (order_detail.item.with_tax_price*order_detail.amount) %>
-			  	<% @total += (order_detail.item.with_tax_price*order_detail.amount) %>
-			  </td>
-		  </tr>
-	  <% end %>
-	</table><br>
+			<td style="vertical-align: top;">
+        <strong>注文情報</strong>
+        <table border="1" style="width: 500px;">
+          <tr>
+		      	<td style="background-color: whitesmoke; width: 100px; height: 40px">注文日</th>
+	      		<td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
+      		</tr>
+	      	<tr>
+		      	<td style="background-color: whitesmoke;">配送先</td>
+	      		<td>〒<%= @order.shipping_postcode %><br><%= @order.shipping_address %><br><%= @order.shipping_name %></td>
+	      	</tr>
+	      	<tr>
+	      		<td style="background-color: whitesmoke; height: 40px">支払方法</td>
+	      		<td><%= @order.payment_method %></td>
+	      	</tr>
+      		<tr>
+      			<td style="background-color: whitesmoke; height: 40px">ステータス</td>
+	      		<td><%= @order.status %></td>
+	      	</tr>
+      	</table><br>
+      </td>
+      <td style="width: 40px;"></td>
+      <td style="vertical-align: top;">
+	      <strong>注文内容</strong>
+	      <table border="1" style="width: 400px;">
+	      	<tr>
+		      	<td style="background-color: whitesmoke; height: 40px">商品</td>
+		      	<td style="background-color: whitesmoke; height: 40px">単価（税込み)</td>
+		      	<td style="background-color: whitesmoke; height: 40px">個数</td>
+		      	<td style="background-color: whitesmoke; height: 40px">小計</td>
+	      	</tr>
+	      	<% @order_details.each do |order_detail| %>
+		      	<tr>
+			       	<td style="height: 40px"><%= order_detail.item.name %></td>
+			       	<td><%= order_detail.item.with_tax_price %></td>
+			       	<td><%= order_detail.amount %></td>
+			       	<td><%= (order_detail.item.with_tax_price*order_detail.amount) %>
+			         	<% @total += (order_detail.item.with_tax_price*order_detail.amount) %>
+			        </td>
+		        </tr>
+	        <% end %>
+	      </table>
+	    </td>
+	  </tr>
+	</table>
 	<strong>請求情報</strong>
 	<table border="1" style="width: 200px;">
 	  <tr>
