@@ -1,2 +1,40 @@
-<h1>Public::Customers#edit</h1>
-<p>Find me in app/views/public/customers/edit.html.erb</p>
+<div style="width: 800px; margin: 30px auto;">
+  <h5 style="width: 160px; text-align: center; background-color: lightgray;">会員情報編集</h5>
+
+  <br>
+
+  <%= form_with model: @customer, url: public_customers_path, method: :patch, local: true do |f| %>
+
+    <div class="form-group">
+      <%= f.label :first_name, '名前　　　　　　　　　　　（姓）　' %>
+      <%= f.text_field :first_name, autofocus: true %>
+      <%= f.label :last_name, '　　（名）　' %>
+      <%= f.text_field :last_name %>
+    </div>
+    <div class="form-group">
+      <%= f.label :first_name_kana, 'フリガナ　　　　　　　　　（セイ）' %>
+      <%= f.text_field :first_name_kana %>
+      <%= f.label :last_name_kana, '　　（メイ）' %>
+      <%= f.text_field :last_name_kana %>
+    </div>
+    <div class="form-group">
+      <%= f.label :email, 'メールアドレス　　　　　　　　　　' %>
+      <%= f.email_field :email %>
+    </div>
+    <div class="form-group">
+      <%= f.label :postcode, '郵便番号（ハイフンなし）　　　　　' %>
+      <%= f.text_field :postcode %>
+    </div>
+    <div class="form-group">
+      <%= f.label :address, '住所　　　　　　　　　　　　　　　' %>
+      <%= f.text_field :address, size: 60 %>
+    </div>
+    <div class="form-group">
+      <%= f.label :phone_number, '電話番号（ハイフンなし）　　　　　' %>
+      <%= f.telephone_field :phone_number %>
+    </div>
+
+    <br>　　　　　　　　　　　　　　　　　<%= f.submit "編集内容を保存", class: "btn btn-success" %>　　　　　　<%= link_to "退会する", public_customers_confirm_path, class: "btn btn-danger" %>
+
+  <% end %>
+</div>

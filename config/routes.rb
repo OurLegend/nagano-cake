@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root to: "public/homes#top"
-  
+
   devise_for :admins, skip: [:registrations, :passwords] , controllers: {
   sessions: "admin/sessions"
 }
@@ -24,24 +24,33 @@ Rails.application.routes.draw do
     resources :items, only: [:index, :new, :create, :show, :edit, :update]
   end
   namespace :admin do
-    get 'homes/top'
+    root to: "homes#top"
   end
   namespace :public do
     resources :destinations, only: [:index, :create, :edit, :update, :destroy]
   end
   namespace :public do
-    resources :orders, only: [:new, :create, :index, :show]
-    get 'orders/confirm'
     get 'orders/complete'
+    get 'orders/confirm'
+    post 'orders/confirm'
+    resources :orders, only: [:new, :create, :index, :show]
   end
   namespace :public do
-    resources :cart_items, only: [:create, :index, :update, :destroy]
-    delete 'cart_items/destroy_all'
+    resources :cart_items, only: [:create, :index, :update, :destroy] do
+      collection do
+        delete 'cart_items/destroy_all', as: 'cart_items_destroy_all'
+      end
+    end
   end
   namespace :public do
-    resource :customers, only: [:show, :edit, :update]
+    resource :customers, only: [:show, :edit, :update] do
+      collection do
+        get :confirm
+        patch :withdraw
+      end
+    end
     get 'customers/confirm'
-    patch 'customers' => 'customers#destroy', as: 'destroy'
+    #patch 'customers' => 'customers#withdraw', as: 'withdraw'
   end
   namespace :public do
     resources :items, only: [:index, :show]
