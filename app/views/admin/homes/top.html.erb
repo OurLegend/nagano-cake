@@ -9,7 +9,7 @@
       <h5>注文個数</h5>
       <%= order.order_details.sum(:amount) %>
       <h5>注文ステータス</h5>
-      <%= order.status %>
+      <%= order.status_i18n %>
     <% end %>
   </div>
 </div>
