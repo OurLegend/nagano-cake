@@ -1,16 +1,18 @@
 <div class = "container">
   <div class = "row mt-5">
-    <h4 style = "background-color: whitesmoke; height: 30px">ジャンル一覧・追加</h4>
-    <% if @genre.errors.any? %>
-      <ul class="alert alert-danger" role="alert">
-        <% @genre.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    <% end %>
+    <div class = "col-9">
+      <h4 style = "background-color: whitegray; height: 30px">ジャンル一覧・追加</h4>
+      <% if @genre.errors.any? %>
+        <ul class="alert alert-danger" role="alert">
+          <% @genre.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
 
 
-      <div class="row">
+      <div class="col-5" >
 
           <%= form_with model: @genre, url: admin_genres_path, method: :post do |f| %>
             <table class = 'table'>
@@ -24,7 +26,7 @@
             </table>
           <% end %>
       </div>
-      <div class="row">
+      <div class="col-3">
         <table class = "table">
           <h6>ジャンル</h6>
           <% @genres.each do |genre| %>
