@@ -1,4 +1,7 @@
-<h5>注文履歴詳細</h5>
+<div class="container">
+<h3 style="width: 300px; text-align: center; background-color: lightgray;">注文履歴詳細</h3>
+<div "row">
+  <div class="col-xs-6">
 <table>
   <tr>
     <td>購入者</td>
@@ -15,12 +18,55 @@
   <tr>
     <td>注文ステータス</td>
     <td>
-      <%= form_with model: @order, url: admin_order_path, method: :patch do |f| %>
-        <%= f.select :status, Order.statuses_i18n.invert, {prompt: false}, class:"form-control" %>
     </td>
     <td>
-      <%= f.submit '変更', class: 'btn btn-success' %>
+      <%= form_with model: @order, url: admin_order_path, method: :patch do |f| %>
+        <%= f.select :status, Order.statuses_i18n.invert, {prompt: false}, class:"form-control" %>
+        <%= f.submit '変更', class: 'btn btn-success' %>
       <% end %>
     </td>
   </tr>
 </table>
+  </div>
+</div>
+<table>
+  <thead>
+    <td>商品名</td>
+    <td>単価(税込み)</td>
+    <td>数量</td>
+    <td>小計</td>
+    <td>製作ステータス</td>
+  </thead>
+  <% @order_details.each do |order_detail| %> 
+  <tbody>
+    <td><%= order_detail.item.name %></td>
+    <td><%= order_detail.item.with_tax_price %></td>
+    <td><%= order_detail.amount %></td>
+    <td><%= (order_detail.item.with_tax_price*order_detail.amount) %>
+        <% @total += (order_detail.item.with_tax_price*order_detail.amount) %>
+    </td>
+    <td>
+      <%= form_with model: order_detail, url: admin_order_detail_path(order_detail), method: :patch do |f| %>
+        <%= f.select :production_status, OrderDetail.production_statuses_i18n.invert, {prompt: false}, class:"form-control" %>
+        <%= f.submit '変更', class: "btn btn-success" %>
+      <% end %>  
+    </td>
+  </tbody>
+  <% end %>
+</table>
+<strong>請求情報</strong>
+	<table>
+	  <tr>
+	    <td>商品合計</td>
+	    <td><%= @total %></td>
+	  </tr>
+	  <tr>
+	    <td>配送料</td>
+	    <td>800</td>
+	  </tr>
+	  <tr>
+	    <td>ご請求額</td>
+	    <td><%= @total + 800 %></td>
+	  </tr>
+	</table><br><br>
+</div>	

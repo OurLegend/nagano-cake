@@ -22,7 +22,7 @@
           <% end %>
         </td>
         <td>　<%= order.total_price %></td>
-        <td>　<%= order.status %></td>
+        <td>　<%= order.status_i18n %></td>
         <td>　<%= link_to "注文詳細", public_order_path(order.id), class: "btn btn-primary" %></td>
       </tr>
     <% end %>
