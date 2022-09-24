@@ -18,9 +18,9 @@
       <div style="margin-left: 40px;"><%= f.collection_select(:destination, current_customer.destinations.all, :id, :destination_all) %></div><br><br>
       <label style="margin-left: 30px;"><%= f.radio_button :address_option , 3 %> 新しいお届け先</label><br>
       <div style="margin-left: 40px ;">
-        <label>郵便番号（ハイフンなし）　<%= f.text_field :shipping_postcode %></label><br>
-        <label>住所　　　　　　　　　　　<%= f.text_field :shipping_address , size: 50 %></label><br>
-        <label>宛名　　　　　　　　　　　<%= f.text_field :direction %></label>
+        <label>郵便番号（ハイフンなし）　<%= f.text_field :shipping_postcode, placeholder: "0000000" %></label><br>
+        <label>住所　　　　　　　　　　　<%= f.text_field :shipping_address , placeholder: "東京都渋谷区代々木神園町0-0", size: 50 %></label><br>
+        <label>宛名　　　　　　　　　　　<%= f.text_field :direction, placeholder: "令和道子" %></label>
       </div>
     </div><br>
     　　　　　　　　　　　　　　　　　<%= f.submit "確認画面へ進む", class: "btn btn-primary" %>
