@@ -19,19 +19,9 @@ class Public::OrdersController < ApplicationController
       @order.shipping_address = Destination.find(params[:order][:destination]).shipping_address
       @order.shipping_name = Destination.find(params[:order][:destination]).direction
     elsif params[:order][:address_option] == "3"
-      @destination = Destination.new()
-      @destination.shipping_postcode = params[:order][:shipping_postcode]
-      @destination.shipping_address = params[:order][:shipping_address]
-      @destination.direction = params[:order][:direction]
-      @destination.customer_id = current_customer.id
-      if @destination.save
-        @order.shipping_postcode = @destination.shipping_postcode
-        @order.shipping_address = @destination.shipping_address
-        @order.shipping_name = @destination.direction
-      else
-        flash[:notice] = "※配送先を入力してください。"
-        render 'new'
-      end
+      @order.shipping_postcode = params[:order][:shipping_postcode]
+      @order.shipping_address = params[:order][:shipping_address]
+      @order.shipping_name = params[:order][:direction]
     end
     @cart_items = CartItem.where(customer_id: current_customer.id)
     @total = 0
@@ -43,17 +33,27 @@ class Public::OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     @order.customer_id = current_customer.id
-    @order.save
-    current_customer.cart_items.each do |cart_item|
-      @order_detail = OrderDetail.new
-      @order_detail.item_id = cart_item.item_id
-      @order_detail.amount = cart_item.amount
-      @order_detail.price = cart_item.item.with_tax_price
-      @order_detail.order_id =  @order.id
-      @order_detail.save
+    if @order.save
+      current_customer.cart_items.each do |cart_item|
+        @order_detail = OrderDetail.new
+        @order_detail.item_id = cart_item.item_id
+        @order_detail.amount = cart_item.amount
+        @order_detail.price = cart_item.item.with_tax_price
+        @order_detail.order_id =  @order.id
+        @order_detail.save
+      end
+      @destination = Destination.new()
+      @destination.shipping_postcode = @order.shipping_postcode
+      @destination.shipping_address = @order.shipping_address
+      @destination.direction = @order.shipping_name
+      @destination.customer_id = current_customer.id
+      @destination.save
+      current_customer.cart_items.destroy_all
+      redirect_to public_orders_complete_path
+    else
+      flash[:notice] = "住所の情報がありません。"
+      render :new
     end
-    current_customer.cart_items.destroy_all
-    redirect_to public_orders_complete_path
   end
 
   def index
