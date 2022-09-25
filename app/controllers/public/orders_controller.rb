@@ -10,6 +10,7 @@ class Public::OrdersController < ApplicationController
   def confirm
     params[:order][:payment_method] = params[:order][:payment_method].to_i
     @order = Order.new(order_params)
+    #ラジオボタンの選択によって分岐します
     if params[:order][:address_option] == "1"
       @order.shipping_postcode = current_customer.postcode
       @order.shipping_address = current_customer.address
@@ -42,15 +43,11 @@ class Public::OrdersController < ApplicationController
         @order_detail.order_id =  @order.id
         @order_detail.save
       end
-      @destination = Destination.new()
-      @destination.shipping_postcode = @order.shipping_postcode
-      @destination.shipping_address = @order.shipping_address
-      @destination.direction = @order.shipping_name
-      @destination.customer_id = current_customer.id
-      @destination.save
+      #カートの中身を削除
       current_customer.cart_items.destroy_all
       redirect_to public_orders_complete_path
     else
+      #住所が入力されなければ注文できません
       flash[:notice] = "住所の情報がありません。"
       render :new
     end
@@ -67,16 +64,12 @@ class Public::OrdersController < ApplicationController
   end
 
   private
-
+#リロードすると情報入力に戻ります
   def request_post?
     redirect_to new_public_order_path, notice: "※もう一度最初から入力してください。" unless request.post?
   end
 
   def order_params
     params.require(:order).permit(:payment_method, :shipping_address, :postage, :shipping_postcode, :shipping_name, :total_price)
-  end
-
-  def address_params
-    params.require(:order).permit(:name, :address)
   end
 end
