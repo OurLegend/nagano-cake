@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row mt-5">
     <!--ジャンル枠の挿入-->
-    <%= render "public/items/genres" %>
+    <%= render "public/items/genres", genres: @genres %>
     <div class="col-9">
       <h2 class="d-inline">商品一覧</h2><span>(全<%= @items.count %>件)</span>
       <!--商品一覧-->

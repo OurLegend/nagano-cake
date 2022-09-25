@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row mt-5">
-    <%= render "public/items/genres" %>
+    <%= render "public/items/genres", genres: @genres %>
     <div class="col-9">
       <!--背景画像の挿入-->
       <div class="col-9 background-img">
@@ -16,26 +16,15 @@
       <h2>新着商品</h2>
       <div class="d-flex justify-content-between">
         <!--画像の追加、または、商品idから引っ張ってくる-->
-        <div>
-          <img>
-          <p>商品名</p>
-          <p>￥0,000</p>
-        </div>
-        <div>
-          <img>
-          <p>商品名</p>
-          <p>￥0,000</p>
-        </div>
-        <div>
-          <img>
-          <p>商品名</p>
-          <p>￥0,000</p>
-        </div>
-        <div>
-          <img>
-          <p>商品名</p>
-          <p>￥0,000</p>
-        </div>
+        <% @items.each do |item| %>
+          <%= link_to public_item_path(item), class:"text-decoration-none text-dark" do %>
+            <div>
+              <p><%= image_tag item.image,  style: "width: 200px; align-self: flex-start;" %></p>
+              <p><%= item.name %></p>
+              <p>¥<%= number_with_delimiter(item.unit_price) %></p>
+            </div>
+          <% end %>
+        <% end %>
       </div>
       <%= link_to '全ての商品を見る>', public_items_path,class: "float-right mb-3" %>
     </div>
