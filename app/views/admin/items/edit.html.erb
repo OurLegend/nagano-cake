@@ -1,7 +1,7 @@
 <div class='container'>
-  <div class='row'>
-    <div class='col-md-3'>
-      <h4>商品編集</h4>
+  <div class='row mt-5'>
+    <div class='col-md-10'>
+      <h4 style = "width: 100px; background-color: lightgray;">商品編集</h4>
       <% if @item.errors.any? %>
         <ul class="alert alert-danger" role="alert">
           <% @item.errors.full_messages.each do |message| %>
@@ -9,36 +9,37 @@
           <% end %>
         </ul>
       <% end %>
-      <%= form_with model: @item, url: admin_items_path, method: :post do |f| %>
-      <div class="form-group">
-      <h6>商品画像</h6>
-        <%= f.file_field :image, accept: "image/*" %>
-      </div>
-      <div class="form-group">
-      <h6>商品名</h6>
-        <%= f.text_field :name %>
-      </div>
-      <div class="form-group">
-      <h6>商品説明</h6>
-        <%= f.text_area :detail %>
-      </div>
-      <div class="form-group">
-      <h6>ジャンル</h6>
-        <%= f.label :genre %>
-        <%= f.select :genre_id, options_from_collection_for_select( Genre.all, :id, :name) %>
-      </div>
-      <div class="form-group">
-      <h6>税抜価格</h6>
-        <%= f.text_field :unit_price %><p>円</p>
-      </div>
-      <div class="form-group">
-      <h6>販売ステータス</h6>
-        <%= f.label :is_active, '販売中', value: 1 %>
-        <%= f.radio_button :is_active, '1' %>
-        <%= f.label :is_active, '販売停止中', value: 0 %>
-        <%= f.radio_button :is_active, '0' %>
-      </div>
-        <%= f.submit '変更を保存', class: 'btn btn-success' %>
+
+      <%= form_with model: @item, url: admin_item_path, method: :patch do |f| %>
+      <table class="table table-borderless">
+        <tr>
+          <td class="form-group"><h6>商品画像</h6></td><td><%= f.file_field :image, accept: "image/*" %></td>
+        </tr>
+        <tr>
+          <td class="form-group"><h6>商品名</h6></td><td><%= f.text_field :name %></td>
+        </tr>
+        <tr>
+          <td class="form-group"><h6>商品説明</h6></td><td><%= f.text_area :detail %></td>
+        </tr>
+        <tr>
+          <td class="form-group"><h6>ジャンル</h6></td>
+          <td><%= f.select :genre_id, options_from_collection_for_select( Genre.all, :id, :name) %></td>
+        </tr>
+        <tr>
+          <td class="form-group"><h6>税抜価格</h6></td><td><%= f.text_field :unit_price %>円</td>
+        </tr>
+        <tr>
+          <td class="form-group"><h6>販売ステータス</h6></td>
+          <td><%= f.label :is_active, '販売中', value: 1 %>
+              <%= f.radio_button :is_active, '1' %>
+              <%= f.label :is_active, '販売停止中', value: 0 %>
+              <%= f.radio_button :is_active, '0' %>
+          </td>
+        </tr>
+        <tr>
+          <td align = "center"><%= f.submit '変更を保存', class: 'btn btn-success' %></td>
+        </tr>
+      </table>
       <% end %>
     </div>
   </div>
