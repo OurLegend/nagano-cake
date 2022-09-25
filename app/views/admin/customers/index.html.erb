@@ -1,5 +1,6 @@
-<h1>会員一覧</h1>
-  <table class='table table-hover table-inverse'>
+<div class="container">
+  <h3 style="width: 140px; background-color: lightgray;">会員一覧</h3>
+    <table class='table table-hover table-inverse'>
     <thead>
       <tr>
         <th>会員ID</th>
@@ -12,8 +13,8 @@
       <% @customers.each do |customer| %>
         <tr>
           <td><%= customer.id %></td>
-          <td>
-            <%= link_to admin_customer_path(customer.id) do %>      
+          <td class="text-dark">
+            <%= link_to admin_customer_path(customer.id), class: "text-dark" do %>      
               <%= customer.full_name %>
             <% end %>
           </td>
@@ -28,3 +29,4 @@
       <% end %>    
     </tbody>
   </table>
+</div>

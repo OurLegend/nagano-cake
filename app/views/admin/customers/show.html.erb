@@ -2,13 +2,17 @@
   <div>
     <h5 style="width: 300px; background-color: lightgray;"><%= "#{@customer.full_name} さんの会員詳細" %></h5>
   </div>    
-  <table class="table">
+  <table class="table table-borderless">
     <tr>
-      <td>会員ID</td>  
+      <td>
+        <strong>会員ID</strong>
+      </td>  
       <td><%= @customer.id %></td>
     </tr>
     <tr>
-      <td>氏名</td>  
+      <td>
+        <strong>氏名</strong>
+      </td>  
       <td><%= @customer.first_name %><%= @customer.last_name %></td>
     </tr>
     <tr>
@@ -16,15 +20,21 @@
       <td><%= @customer.first_name_kana %><%= @customer.last_name_kana %></td>
     </tr>
     <tr>
-      <td>郵便番号</td>  
+      <td>
+        <strong>郵便番号</strong>
+      </td>  
       <td><%= @customer.postcode %></td>
     </tr>
     <tr>
-      <td>住所</td>  
+      <td>
+        <strong>住所</strong>
+      </td>  
       <td><%= @customer.address %></td>
     </tr>
     <tr>
-      <td>電話番号</td>  
+      <td>
+        <strong>電話番号</strong>
+      </td>  
       <td><%= @customer.phone_number %></td>
     </tr>       
     <tr>
@@ -32,7 +42,9 @@
       <td><%= @customer.email %></td>
     </tr>       
     <tr>
-      <td>会員ステータス</td>  
+      <td>
+        <strong>会員ステータス</strong>
+      </td>  
       <td>
         <% if @customer.is_deleted == false %>
           <strong class="text-success"><%= "有効" %></strong>
@@ -42,8 +54,8 @@
       </td>
     </tr>       
   </table>
-  <div class="row">
-    <%= link_to "編集", edit_admin_customer_path(@customer), class: "btn btn-success" %>
+  <div style="text-align: center;">
+    <%= link_to "編集する", edit_admin_customer_path(@customer), class: "btn btn-success" %>
   </div>
 </div>
  
