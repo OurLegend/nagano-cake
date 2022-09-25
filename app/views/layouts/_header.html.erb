@@ -2,7 +2,7 @@
   <div class="container">
     <nav class="navbar navbar-expand-lg">
       <%= link_to public_root_path do %>
-        <h3 class="border border-dark py-1 px-5 mt-5 text-dark">LOGO</h3>
+        <%= image_tag 'logo2.jpg', style: "width: 220px;" %>
       <% end %>
       <ul class="navbar-nav ml-auto">
         <% if customer_signed_in? %>
@@ -23,7 +23,7 @@
     <!--検索フォーム（検索機能追加時修正）-->
     <div class="text-right mt-n4">
       <%= form_with do |f| %>
-        <%= f.text_field :content, default: "Search" %>
+        <%= f.text_field :content, placeholder: "Search" %>
         <%= button_tag '<i class="fa fa-search"></i>'.html_safe, :type => "submit",:class =>"btn btn-default btn-s-md" %>
       <% end %>
     </div>

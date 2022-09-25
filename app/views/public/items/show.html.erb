@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row mt-5">
-    <%= render "public/items/genres" %>
+    <%= render "public/items/genres", genres: @genres %>
     <div class="col-9">
       <%= flash[:notice] %>
       <% flash.clear %>
