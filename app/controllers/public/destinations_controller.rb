@@ -1,16 +1,16 @@
 class Public::DestinationsController < ApplicationController
   def index
-    @destinations = Destination.all
-    @destination = Destination.new
+    @destinations = current_customer.destinations.all
+    @destination = current_customer.destinations.new
   end
 
   def create
-    @destination = Destination.new(destination_params)
+    @destination = current_customer.destinations.new(destination_params)
     @destination.customer_id = current_customer.id
     if @destination.save
       redirect_to public_destinations_path
     else
-      @destinations = Destination.all
+      @destinations = current_customer.destinations.all
       render :index
     end
   end
