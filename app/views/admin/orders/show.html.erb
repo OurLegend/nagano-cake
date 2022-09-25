@@ -1,36 +1,42 @@
 <div class="container">
   <h3 style="width: 300px; text-align: center; background-color: lightgray;">注文履歴詳細</h3>
-<table>
-  <tr class="row">
-    <td class="col-lg-4">
-      <strong>購入者</strong>
-      </td>
-    <td class=" col-lg-4 ml-5 mb-2"><%= @order.customer.full_name %></td>
-  </tr>
-  <tr class="row">
-    <td class="col-lg-4">
-      <strong>配送先</strong>
-    </td>
-    <td class="col-lg-5 ml-5 mb-2">〒<%= @order.shipping_postcode %><%= @order.shipping_address %><br><%= @order.shipping_name %></td>
-  </tr>
-  <tr class="row">
-    <td class="col-lg-4">
-      <strong>支払方法</strong>
-    </td>
-    <td class="col-lg-6 ml-5 mb-2"><%= @order.payment_method_i18n %></td>
-  </tr>
-  <tr class="row">
-    <td class="col-lg-6">
-      <strong>注文ステータス</strong>
-    </td>
-    <%= form_with model: @order, url: admin_order_path, method: :patch do |f| %>
-      <td class="col-lg-4">
-        <%= f.select :status, Order.statuses_i18n.invert, {prompt: false}, class:"form-control" %>
-      </td>
-      <td class="col-lg-2 mb-4"><%= f.submit '変更', class: 'btn btn-success ml-5' %></td>
-    <% end %>
-  </tr>
-</table>
+  <%= form_with model: @order, url: admin_order_path, method: :patch do |f| %>
+    <table>
+      <tr class="row">
+        <td class="col-lg-4">
+          <strong>購入者</strong>
+        </td>
+        <td class=" col-lg-4 ml-5 mb-2"><%= @order.customer.full_name %></td>
+      </tr>
+      <tr class="row">
+        <td class="col-4">
+          <strong>注文日</strong>
+        </td>
+        <td class="col-5 ml-5 mb-2"><%= @order.created_at.strftime('%Y/%m/%d') %></td>
+      </tr>
+      <tr class="row">
+        <td class="col-lg-4">
+          <strong>配送先</strong>
+        </td>
+        <td class="col-lg-5 ml-5 mb-2">〒<%= @order.shipping_postcode %><%= @order.shipping_address %><br><%= @order.shipping_name %></td>
+      </tr>
+      <tr class="row">
+        <td class="col-lg-4">
+          <strong>支払方法</strong>
+        </td>
+        <td class="col-lg-6 ml-5 mb-2"><%= @order.payment_method_i18n %></td>
+      </tr>
+      <tr class="row">
+        <td class="col-lg-6">
+          <strong>注文ステータス</strong>
+        </td>
+        <td class="col-lg-4">
+          <%= f.select :status, Order.statuses_i18n.invert, {prompt: false}, class:"form-control" %>
+        </td>
+        <td class="col-lg-2 mb-4"><%= f.submit '変更', class: 'btn btn-success ml-5' %></td>
+      </tr>
+    </table>
+  <% end %>
   <div class="row">
     <table class="table col-lg-7">
       <thead class="border-top border-2 border-secondary bg-light">
