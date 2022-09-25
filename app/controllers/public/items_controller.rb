@@ -12,7 +12,4 @@ class Public::ItemsController < ApplicationController
     @cart_item = CartItem.new
   end
   
-  def admin_url
-    request.fullpath.include?("/admin")
-  end
 end
