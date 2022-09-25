@@ -1,23 +1,28 @@
 <div class = "container px-5 px-sm-0">
   <div class = "row">
-    <h4>ジャンル編集</h4>
-    <% if @genre.errors.any? %>
-      <ul class="alert alert-danger" role="alert">
-        <% @genre.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    <% end %>
-    <%= form_with model: @genre, url: admin_genre_path(@genre.id), method: :patch do |f| %>
-    <table class = 'table'>
-      <tbody>
-        <tr>
-          <td><%= f.label :name, 'ジャンル名', class: 'font-weight-bold' %></td>
-          <td><%= f.text_field :name %></td>
-          <td><%= f.submit '変更を保存', class: 'btn btn-success' %></td>
-        </tr>
-      </tbody>
-    </table>
-    <% end %>
+    <div class = "col-md-8 mt-5">
+      <h4 style = "width: 150px; background-color: lightgray;">ジャンル編集</h4>
+      <% if @genre.errors.any? %>
+        <ul class="alert alert-danger" role="alert">
+          <% @genre.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+    <div class="col-2 col-sm-8 mt-5 " >
+      <%= form_with model: @genre, url: admin_genre_path(@genre.id), method: :patch do |f| %>
+        <table class = 'table'>
+          <tbody>
+            <tr>
+              <td><%= f.label :name, 'ジャンル名', class: 'font-weight-bold' %></td>
+              <td><%= f.text_field :name %></td>
+              <td><%= f.submit '変更を保存', class: 'btn btn-success' %></td>
+            </tr>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+
   </div>
 </div>

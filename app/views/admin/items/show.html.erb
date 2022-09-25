@@ -1,16 +1,23 @@
-<h4>商品詳細</h4>
+<div class = "container">
+  <div class = "row mt-5">
+    <div class = "col-md-10">
+      <h4 style = "width: 100px; background-color: lightgray;">商品詳細</h4>
+      <div class="d-flex mt-5">
+        <%= image_tag @item.image, style: "width: 400px; height: 300px; align-self: flex-start;" %>
+        <div class="d-inline ml-5">
+          <table class="table table-borderless">
+            <tr><td style = "width :200px;">商品名</td><td><%= @item.name %></td></tr>
+            <tr><td>商品説明</td><td><%= @item.detail %></td></tr>
+            <tr><td>ジャンル</td><td><%= @item.genre.name %></td></tr>
+            <tr><td>税込価格（税抜価格）</td><td><%= @item.with_tax_price.to_s(:delimited) %>
+              <%= "(#{number_with_delimiter(@item.unit_price)})" %>円</td></tr>
+            <tr><td>販売ステータス</td><td><strong class="text-success"><%= @item.is_active ? '販売中':'販売停止中' %></strong></td></tr>
+          </table>
+          <div align = "center"><%= link_to "編集する", edit_admin_item_path(@item.id), class: 'btn btn-success' %></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-  <%= image_tag @item.image, size:'350x250' %>
-  <p>商品名</p>
-  <%= @item.name %>
-  <p>商品説明</p>
-  <%= @item.detail %>
-  <p>ジャンル</p>
-  <%= @item.genre.name %>
-  <p>税込価格</p><p>（税抜価格）</p>
-  <%= number_with_delimiter(@item.unit_price) %>円
-  <%= @item.with_tax_price.to_s(:delimited) %>円
-  <p>販売ステータス</p>
-  <%= @item.is_active ? '販売中':'販売停止中' %>
-  <%= link_to "編集する", edit_admin_item_path(@item.id), class: 'btn btn-success' %>
 
