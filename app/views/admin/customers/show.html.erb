@@ -1,2 +1,62 @@
-<h1>Admin::Customers#show</h1>
-<p>Find me in app/views/admin/customers/show.html.erb</p>
+<div class="container">
+  <div>
+    <h5 style="width: 300px; background-color: lightgray;"><%= "#{@customer.full_name} さんの会員詳細" %></h5>
+  </div>    
+  <table class="table table-borderless">
+    <tr>
+      <td>
+        <strong>会員ID</strong>
+      </td>  
+      <td><%= @customer.id %></td>
+    </tr>
+    <tr>
+      <td>
+        <strong>氏名</strong>
+      </td>  
+      <td><%= @customer.first_name %><%= @customer.last_name %></td>
+    </tr>
+    <tr>
+      <td>フリガナ</td>
+      <td><%= @customer.first_name_kana %><%= @customer.last_name_kana %></td>
+    </tr>
+    <tr>
+      <td>
+        <strong>郵便番号</strong>
+      </td>  
+      <td><%= @customer.postcode %></td>
+    </tr>
+    <tr>
+      <td>
+        <strong>住所</strong>
+      </td>  
+      <td><%= @customer.address %></td>
+    </tr>
+    <tr>
+      <td>
+        <strong>電話番号</strong>
+      </td>  
+      <td><%= @customer.phone_number %></td>
+    </tr>       
+    <tr>
+      <td>メールアドレス</td>  
+      <td><%= @customer.email %></td>
+    </tr>       
+    <tr>
+      <td>
+        <strong>会員ステータス</strong>
+      </td>  
+      <td>
+        <% if @customer.is_deleted == false %>
+          <strong class="text-success"><%= "有効" %></strong>
+        <% else %>
+          <strong class="text-secondary"><%= "退会" %></strong>
+        <% end %>  
+      </td>
+    </tr>       
+  </table>
+  <div style="text-align: center;">
+    <%= link_to "編集する", edit_admin_customer_path(@customer), class: "btn btn-success" %>
+  </div>
+</div>
+ 
+ 

@@ -1,0 +1,13 @@
+<div class="col-3">
+  <div class="border border-dark">
+    <p class="border-bottom border-dark text-center">ジャンル検索</p>
+    <div>
+        <!-- ジャンル呼び出し-->
+        <ul class="list-unstyled">
+          <% genres.each do |genre| %>
+            <li class="my-2 ml-4"><%= genre.name %></li>
+          <% end %>
+        </ul>
+    </div>
+  </div>
+</div>

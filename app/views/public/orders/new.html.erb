@@ -1,2 +1,28 @@
-<h1>Public::Orders#new</h1>
-<p>Find me in app/views/public/orders/new.html.erb</p>
+<div style="width: 800px; margin: 30px auto;">
+  <h5 style="width: 160px; text-align: center; background-color: lightgray;">注文情報入力</h5><%= flash[:notice] %>
+
+  <br>
+
+  <%= form_with model: @order, url: public_orders_confirm_path, method: :post, local: true do |f| %>
+
+    <strong>支払方法</strong>
+    <div>
+      <label style="margin-left: 30px;"><%= f.radio_button :payment_method, 0, checked: "checked" %> クレジットカード </label><br>
+      <label style="margin-left: 30px;"><%= f.radio_button :payment_method, 1 %> 銀行振込</label>
+    </div>
+    <strong>お届け先</strong>
+    <div>
+      <label style="margin-left: 30px;"><%= f.radio_button :address_option, 1, checked: "checked" %> ご自身の住所 </label><br>
+      <div style="margin-left: 40px;">〒<%= current_customer.postcode %> <%= current_customer.address %><br><%= current_customer.first_name %><%= current_customer.last_name %></div><br>
+      <label style="margin-left: 30px;"><%= f.radio_button :address_option , 2 %> 登録済住所から選択</label><br>
+      <div style="margin-left: 40px;"><%= f.collection_select(:destination, current_customer.destinations.all, :id, :destination_all) %></div><br><br>
+      <label style="margin-left: 30px;"><%= f.radio_button :address_option , 3 %> 新しいお届け先</label><br>
+      <div style="margin-left: 40px ;">
+        <label>郵便番号（ハイフンなし）　<%= f.text_field :shipping_postcode, placeholder: "0000000" %></label><br>
+        <label>住所　　　　　　　　　　　<%= f.text_field :shipping_address , placeholder: "東京都渋谷区代々木神園町0-0", size: 50 %></label><br>
+        <label>宛名　　　　　　　　　　　<%= f.text_field :direction, placeholder: "令和道子" %></label>
+      </div>
+    </div><br>
+    　　　　　　　　　　　　　　　　　<%= f.submit "確認画面へ進む", class: "btn btn-primary" %>
+  <% end %>
+</div>

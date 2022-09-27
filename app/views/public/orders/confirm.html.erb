@@ -1,2 +1,56 @@
-<h1>Public::Orders#confirm</h1>
-<p>Find me in app/views/public/orders/confirm.html.erb</p>
+<div style="width: 800px; margin: 30px auto 0px;">
+  <h5 style="width: 140px; text-align: center; background-color: lightgray;">注文情報確認</h5>
+</div>
+<div style="width: 1000px; margin: 0 auto;">
+  <%= form_with model: @order, url: public_orders_path, method: :post, local: true do |f| %>
+    <table border="0">
+      <tr>
+        <td style="vertical-align: top;">
+          <table border="1" style="width: 600px;">
+            <tr>
+              <td style="background-color: whitesmoke; height: 40px">　商品名</td>
+              <td style="background-color: whitesmoke;">　単価(税込)</td>
+              <td style="background-color: whitesmoke;">　数量</td>
+              <td style="background-color: whitesmoke;">　小計</td>
+            </tr>
+            <% @cart_items.each do |cart_item| %>
+            <% @total+= (cart_item.item.with_tax_price*cart_item.amount).floor %>
+              <tr>
+                <td style="height: 40px"><%= cart_item.item.name %></td>
+                <td>　<%= cart_item.item.with_tax_price %></td>
+                <td>　<%= cart_item.amount %></td>
+                <td>　<%= cart_item.item.with_tax_price*cart_item.amount %></td>
+              </tr>
+            <% end %>
+          </table>
+        </td>
+        <td style="width: 40px;"></td>
+        <td style="vertical-align: top;">
+          <table border="1" style="width: 300px;">
+            <tr>
+              <td style="background-color: whitesmoke; width: 150px; height: 40px">　送料</td>
+              <td style="width: 150px;">　800</td>
+            </tr>
+            <tr>
+              <td style="background-color: whitesmoke; height: 40px">　商品合計</td>
+              <td>　<%= @total %></td>
+            </tr>
+            <tr>
+              <td style="background-color: whitesmoke; height: 40px">　請求金額</td>
+              <td>　<%= @total + 800 %></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table><br>
+    <p style="margin-left: 100px;"><strong>支払方法 </strong>　<%= @order.payment_method_i18n %></p><br>
+    <p style="margin-left: 100px;"><strong>お届け先 </strong>　〒<%= @order.shipping_postcode %> <%= @order.shipping_address %><br>　　 　　　<%= @order.shipping_name %></p><br>
+    <%= f.hidden_field :payment_method ,:value => @order.payment_method %>
+    <%= f.hidden_field :postage ,:value => 800 %>
+    <%= f.hidden_field :shipping_postcode,:value => @order.shipping_postcode %>
+    <%= f.hidden_field :shipping_address,:value => @order.shipping_address %>
+    <%= f.hidden_field :shipping_name,:value => @order.shipping_name %>
+    <%= f.hidden_field :total_price ,:value => @total + 800 %><br><br>
+    <div style="margin-left: 400px;"><%= f.submit "購入を確定する", class: "btn btn-success" %></div><br><br>
+  <% end %>
+</div>
