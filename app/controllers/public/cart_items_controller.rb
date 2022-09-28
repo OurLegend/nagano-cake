@@ -2,6 +2,7 @@ class Public::CartItemsController < ApplicationController
   def create
     @cart_items = current_customer.cart_items.all
     @cart_item = current_customer.cart_items.new(cart_item_params)
+    @genres = Genre.all
     if @cart_item.amount != nil
       @cart_items.each do |cart_item|
         if cart_item.item_id == @cart_item.item_id
